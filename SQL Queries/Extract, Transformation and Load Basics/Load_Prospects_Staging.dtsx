@@ -1,0 +1,719 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="9/21/2022 2:41:25 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-S66V30C"
+  DTS:CreatorName="DESKTOP-S66V30C\Win1OPro Station"
+  DTS:DTSID="{19DDACBD-6584-44A3-98FF-C602989010D0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.694.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Load_Prospects_Staging"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{B5F3A5AE-12C5-4072-BA74-29E15FC6F8BA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Destination_Prospects]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{FB83E537-C631-415E-A911-DF34543047E0}"
+      DTS:ObjectName="Destination_Prospects">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-S66V30C\SQLEXPRESS;Initial Catalog=Prospects;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Load_Prospects_Staging-{FB83E537-C631-415E-A911-DF34543047E0}DESKTOP-S66V30C\SQLEXPRESS.Prospects;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{4CCD9754-BB18-4F43-B7F7-6A87FC576E19}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Users\Win1OPro Station\Desktop\ExcelFiles\prospect_B.xls;Extended Properties=&quot;Excel 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load tbl_stg_Prospects"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2DCA805B-A10D-4DAF-882A-C30ED560FB92}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load tbl_stg_Prospects"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load tbl_stg_Prospects\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input].Columns[Name ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Name "
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Name ]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input].Columns[Title ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Title "
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Title ]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input].Columns[Company ]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Company "
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Company ]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input].Columns[Location]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="Location"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Location]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Name_STR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Name_STR]"
+                      name="Name_STR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Name ]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Title_STR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Title_STR]"
+                      name="Title_STR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Title ]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Company_STR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Company_STR]"
+                      name="Company_STR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Company ]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Location_STR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="250"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Location_STR]"
+                      name="Location_STR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Location]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel_ProspectFiles"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">Sheet1$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Name ]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Name ]"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Name ]"
+                      name="Name "
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Title ]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Title ]"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Title ]"
+                      name="Title "
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Company ]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Company ]"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Company ]"
+                      name="Company "
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Location]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Location]"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].Columns[Location]"
+                      name="Location"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Name ]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name " />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Title ]"
+                      dataType="wstr"
+                      length="255"
+                      name="Title " />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Company ]"
+                      dataType="wstr"
+                      length="255"
+                      name="Company " />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output].ExternalColumns[Location]"
+                      dataType="wstr"
+                      length="255"
+                      name="Location" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Name ]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Name ]"
+                      name="Name " />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Title ]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Title ]"
+                      name="Title " />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Company ]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Company ]"
+                      name="Company " />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Location]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[Location]"
+                      name="Location" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load tbl_stg_Prospects\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[tbl_stg_Prospects]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">CREATE TABLE	tbl_stg_Prospects 
+			(	[NAME] VARCHAR(250), 
+				Title VARCHAR(250), 
+				Company VARCHAR(250), 
+				[Location] VARCHAR(250), 
+				FirstName VARCHAR(250), 
+				LastName VARCHAR(250), 
+				Designation VARCHAR(250), 
+				Department VARCHAR(250),
+				City VARCHAR (250), 
+				[State] VARCHAR(250)
+			)</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Destination_Prospects]"
+                  connectionManagerRefId="Package.ConnectionManagers[Destination_Prospects]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="Name_STR"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NAME]"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Name_STR]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Title_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="Title_STR"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Title_STR]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Company_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="Company_STR"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Company]"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Company_STR]" />
+                    <inputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Location_STR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="250"
+                      cachedName="Location_STR"
+                      externalMetadataColumnId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
+                      lineageId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output].Columns[Location_STR]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NAME]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="NAME" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Company]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Company" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Location]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Location" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Designation]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Designation" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Department]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="Department" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="State" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load tbl_stg_Prospects\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load tbl_stg_Prospects\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load tbl_stg_Prospects.Paths[Data Conversion Output]"
+              endId="Package\Load tbl_stg_Prospects\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Load tbl_stg_Prospects\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Load tbl_stg_Prospects.Paths[Excel Source Output]"
+              endId="Package\Load tbl_stg_Prospects\Data Conversion.Inputs[Data Conversion Input]"
+              name="Excel Source Output"
+              startId="Package\Load tbl_stg_Prospects\Excel_ProspectFiles.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Load tbl_stg_Prospects"
+          TopLeft="118,78" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load tbl_stg_Prospects">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Load tbl_stg_Prospects\Excel_ProspectFiles"
+          TopLeft="29,19" />
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Load tbl_stg_Prospects\OLE DB Destination"
+          TopLeft="22,239" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Load tbl_stg_Prospects\Data Conversion"
+          TopLeft="32.5,123.5" />
+        <EdgeLayout
+          Id="Package\Load tbl_stg_Prospects.Paths[Excel Source Output]"
+          TopLeft="115.75,61">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,62.5"
+              Start="0,0"
+              End="0,55">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load tbl_stg_Prospects.Paths[Data Conversion Output]"
+          TopLeft="111.75,165.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.5"
+              Start="0,0"
+              End="0,66">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,66" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load tbl_stg_Prospects\Excel_ProspectFiles">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load tbl_stg_Prospects\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
